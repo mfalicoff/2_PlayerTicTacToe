@@ -29,13 +29,16 @@ int main(){
         //palyer1
         cout << "Player 1, enter coordinates: ", cin >> posX >> posY;
         cout << endl;
-        player = 0;
+        player = 1;
         nextmove(posX, posY, player);
         printmap();
 
+        if(isgamewon())
+            break;
+
         cout << "Player 2, enter coordinates: ", cin >> posX >> posY;
         cout << endl;
-        player = 1;
+        player = 0;
         nextmove(posX, posY, player);
         printmap();
         round++;
@@ -67,21 +70,25 @@ void nextmove(int posX, int PosY, bool player){
     int spotY = PosY - 1;
 
     if(player){
-        if(isNextMovePoss(posX, PosY)){
-            if(map[spotX][spotY] == '_')
-                map[spotX][spotY] = 'X';
-            else
-                cout << "Error, position already occupied";
-        }else
-            cout << "Move out of boundary";
+        while (!isNextMovePoss(posX, PosY))
+        {
+            cout << "Error, enter another set of coordiantes: ", cin >> posX >> PosY;
+            spotX = posX - 1;
+            spotY = PosY - 1;
+        }
+        map[spotX][spotY] = 'X';
+            
+       
     }else{
-        if(isNextMovePoss(posX, PosY)){
-            if(map[spotX][spotY] == '_')
-                map[spotX][spotY] = 'O';
-        else
-            cout << "Error, position already occupied";
-        }else
-        cout << "Move out of boundary";
+
+     while (!isNextMovePoss(posX, PosY))
+        {
+            cout << "Error, enter another set of coordiantes: ", cin >> posX >> PosY;
+            spotX = posX - 1;
+            spotY = PosY - 1;
+        }
+        map[spotX][spotY] = 'O';
+            
     }
 
    
@@ -90,7 +97,7 @@ void nextmove(int posX, int PosY, bool player){
 }
 
 bool isNextMovePoss(int posX, int PosY){
-    if(posX > 3 || posX <= 0 || PosY > 3 || PosY <= 0)
+    if(posX > 3 || posX <= 0 || PosY > 3 || PosY <= 0 || map[posX-1][PosY-1]  == 'O' || map[posX-1][PosY-1] == 'X')
         return false;
     else
         return true;
