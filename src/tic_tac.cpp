@@ -1,10 +1,21 @@
+/*
+ * Filename: tic_tac.cpp
+ * Created Date: Monday, October 28th 2019, 3:03:26 pm
+ * Author: mfalicoff
+ * Copyright (c) 2019
+ * 
+ * Simple Tic Tac Toe game that requieres two player to play, plan to add computer opponent in the future
+ * 
+ */
+
 #include <iostream>
 #include <iomanip>
 
 using namespace std;
 
-bool player; //if player == 0, then player 1 is playing
+bool player;      //bool value 0 is player 2 and bool value 1 is player 1
 char map[3][3] ;
+
 
 void printmap();
 void nextmove(int posX, int PosY, bool player);
@@ -26,7 +37,6 @@ int main(){
         
         cout  << "-----------------" << "Round " << round << "-----------------" << endl;
         int posX, posY;
-        //palyer1
         cout << "Player 1, enter coordinates: ", cin >> posX >> posY;
         cout << endl;
         player = 1;
@@ -46,7 +56,11 @@ int main(){
 
     }
     
-    cout << "game ended";
+    cout << "Game ended, ";
+    if(player)
+        cout << "Player 1 won the game in " << round - 1 << " rounds!!!!" << endl;
+    else
+        cout << "Player 2 won the game in " << round - 1  << " rounds!!!!" << endl;
 }
 
 void printmap(){
