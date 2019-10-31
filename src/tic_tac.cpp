@@ -13,6 +13,7 @@ bool isgamewon();
 
 int main(){
 
+    int round = 1;
     //Initalizing map to underscrores
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
@@ -21,8 +22,28 @@ int main(){
         
     }
     
+    while (!isgamewon()){
+        
+        cout  << "-----------------" << "Round " << round << "-----------------" << endl;
+        int posX, posY;
+        //palyer1
+        cout << "Player 1, enter coordinates: ", cin >> posX >> posY;
+        cout << endl;
+        player = 0;
+        nextmove(posX, posY, player);
+        printmap();
+
+        cout << "Player 2, enter coordinates: ", cin >> posX >> posY;
+        cout << endl;
+        player = 1;
+        nextmove(posX, posY, player);
+        printmap();
+        round++;
+        cout << "------------------------------------------" << endl;
+
+    }
     
-    
+    cout << "game ended";
 }
 
 void printmap(){
