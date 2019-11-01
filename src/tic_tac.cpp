@@ -43,6 +43,10 @@ int main(){
         nextmove(posX, posY, player);
         printmap();
 
+        if(round == 5){
+            break;
+        }
+
         if(isgamewon())
             break;
 
@@ -51,16 +55,20 @@ int main(){
         player = 0;
         nextmove(posX, posY, player);
         printmap();
-        round++;
+        
         cout << "------------------------------------------" << endl;
+
+
+        round++;
 
     }
     
     cout << "Game ended, ";
-    if(player)
+    if(player && round < 4)
         cout << "Player 1 won the game in " << round - 1 << " rounds!!!!" << endl;
-    else
+    else if(player == 0 && round < 4 )
         cout << "Player 2 won the game in " << round - 1  << " rounds!!!!" << endl;
+    cout << "in a tie" << endl;
 }
 
 void printmap(){
