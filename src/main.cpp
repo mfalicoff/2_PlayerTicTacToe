@@ -60,13 +60,14 @@ int main(){
 
 
         round++;
-
+        if(isgamewon())
+            break;
     }
     
     cout << "Game ended, ";
-    if(player && round < 4)
+    if(player && round < 5)
         cout << "Player 1 won the game in " << round - 1 << " rounds!!!!" << endl;
-    else if(player == 0 && round < 4 )
+    else if(player == 0 && round < 5 )
         cout << "Player 2 won the game in " << round - 1  << " rounds!!!!" << endl;
     cout << "in a tie" << endl;
 }
