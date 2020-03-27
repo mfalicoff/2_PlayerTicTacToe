@@ -126,16 +126,26 @@ bool isgamewon(){
 
     if((map[0][0] == map[0][1]) && (map[0][0] == map[0][2]) && (map[0][0] != '_' )) //First line across
         return true;
+    else if( (map[1][0] == map[1][1]) && (map[1][0] == map[1][2]) && (map[1][0] != '_' )) //Second line across
+        return true;
+    else if( (map[2][0] == map[2][1]) && (map[2][0] == map[2][2]) && (map[2][0] != '_' )) //Third line across
+        return true;
+
     else if((map[0][0] == map[1][0]) && (map[0][0] == map[2][0]) && (map[0][0] != '_' )) // first line down
         return true;
-    else if ((map[0][0] == map[1][1]) && (map[0][0] == map[2][2]) && (map[0][0] != '_' )) // diagonal
+    else if((map[0][1] == map[1][1]) && (map[0][1] == map[2][1]) && (map[0][1] != '_' )) // Second line down
         return true;
-    else if( (map[2][0] == map[2][1]) && (map[2][0] == map[2][2]) && (map[2][0] != '_' )) //bottom line across
+    else if( (map[0][2] == map[1][2]) && (map[0][2] == map[2][2]) && (map[0][2] != '_' )) //Third right down
         return true;
-    else if( (map[0][2] == map[1][2]) && (map[0][2] == map[2][2]) && (map[0][2] != '_' )) //line right down
+
+
+    else if ((map[0][0] == map[1][1]) && (map[0][0] == map[2][2]) && (map[0][0] != '_' )) // diagonal right
         return true;
-    else if( (map[1][0] == map[1][1]) && (map[1][0] == map[1][2]) && (map[1][0] != '_' )) //middle line
+    else if ((map[0][2] == map[1][1]) && (map[0][2] == map[2][0]) && (map[0][2] != '_' )) // diagonal left
         return true;
-    else
-        return false;
+
+
+
+
+    return false;
 }
