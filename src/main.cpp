@@ -67,9 +67,9 @@ int main(){
     cout << "Game ended, ";
     if(player && round < 5)
         cout << "Player 1 won the game in " << round - 1 << " rounds!!!!" << endl;
-    else if(player == 0 && round < 5 )
+    else if(player == 0)
         cout << "Player 2 won the game in " << round - 1  << " rounds!!!!" << endl;
-    cout << "in a tie" << endl;
+    else if (round == 5) cout << "in a tie" << endl;
 }
 
 void printmap(){

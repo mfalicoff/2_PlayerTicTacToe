@@ -20,3 +20,15 @@
 bin/
 
 .vscode/
+
+*.sln
+
+Tic_Tac_Toe.vcxproj
+
+Tic_Tac_Toe.vcxproj.filters
+
+Tic_Tac_Toe.vcxproj.user
+
+x64/
+
+.vs/
