@@ -8,19 +8,14 @@
  * 
  */
 
-#include <iostream>
-#include <iomanip>
+#include "include.h"
 
-using namespace std;
 
 bool player;      //bool value 0 is player 2 and bool value 1 is player 1
 char map[3][3] ;
 
 
-void printmap();
-void nextmove(int posX, int PosY, bool player);
-bool isNextMovePoss(int posX, int PosY);
-bool isgamewon();
+
 
 int main(){
 
@@ -35,10 +30,10 @@ int main(){
     
     while (!isgamewon()){
         
-        cout  << "-----------------" << "Round " << round << "-----------------" << endl;
+        std::cout  << "-----------------" << "Round " << round << "-----------------" << std::endl;
         int posX, posY;
-        cout << "Player 1, enter coordinates: ", cin >> posX >> posY;
-        cout << endl;
+        std::cout << "Player 1, enter coordinates: ", std::cin >> posX >> posY;
+        std::cout << std::endl;
         player = 1;
         nextmove(posX, posY, player);
         printmap();
@@ -50,13 +45,13 @@ int main(){
         if(isgamewon())
             break;
 
-        cout << "Player 2, enter coordinates: ", cin >> posX >> posY;
-        cout << endl;
+        std::cout << "Player 2, enter coordinates: ", std::cin >> posX >> posY;
+        std::cout << std::endl;
         player = 0;
         nextmove(posX, posY, player);
         printmap();
         
-        cout << "------------------------------------------" << endl;
+        std::cout << "------------------------------------------" << std::endl;
 
 
         round++;
@@ -64,25 +59,25 @@ int main(){
             break;
     }
     
-    cout << "Game ended, ";
+    std::cout << "Game ended, ";
     if(player && round < 5)
-        cout << "Player 1 won the game in " << round - 1 << " rounds!!!!" << endl;
+        std::cout << "Player 1 won the game in " << round - 1 << " rounds!!!!" << std::endl;
     else if(player == 0)
-        cout << "Player 2 won the game in " << round - 1  << " rounds!!!!" << endl;
-    else if (round == 5) cout << "in a tie" << endl;
+        std::cout << "Player 2 won the game in " << round - 1  << " rounds!!!!" << std::endl;
+    else if (round == 5) std::cout << "in a tie" << std::endl;
 }
 
 void printmap(){
 
-    cout << "=============" << endl;
+    std::cout << "=============" << std::endl;
     
     for(int i = 0; i < 3; i++){
-        cout << "|" << setw(2) << map[i][0] << setw(2) <<  "|" << setw(2) << map[i][1] << setw(2) << "|" 
-        << setw(2) << map[i][2] << setw(2) << "|" << endl;
+        std::cout << "|" << std::setw(2) << map[i][0] << std::setw(2) <<  "|" << std::setw(2) << map[i][1] << std::setw(2) << "|" 
+        << std::setw(2) << map[i][2] << std::setw(2) << "|" << std::endl;
         if(i < 2)
-            cout << endl;
+            std::cout << std::endl;
     }    
-    cout << "=============" << endl;
+    std::cout << "=============" << std::endl;
     
 }
 
@@ -95,7 +90,7 @@ void nextmove(int posX, int PosY, bool player){
     if(player){
         while (!isNextMovePoss(posX, PosY))
         {
-            cout << "Error, enter another set of coordiantes: ", cin >> posX >> PosY;
+            std::cout << "Error, enter another set of coordiantes: ", std::cin >> posX >> PosY;
             spotX = posX - 1;
             spotY = PosY - 1;
         }
@@ -106,7 +101,7 @@ void nextmove(int posX, int PosY, bool player){
 
      while (!isNextMovePoss(posX, PosY))
         {
-            cout << "Error, enter another set of coordiantes: ", cin >> posX >> PosY;
+            std::cout << "Error, enter another set of coordiantes: ", std::cin >> posX >> PosY;
             spotX = posX - 1;
             spotY = PosY - 1;
         }
