@@ -25,7 +25,6 @@ private:
 
     int round_;
     char gameMap_[3][3];
-    int currentPlayer_;
     player player1_;
     player player2_;
     int spaceLeft_;

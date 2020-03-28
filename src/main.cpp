@@ -19,6 +19,6 @@ int main()
 
     game ticTacToe(sign1, sign2);
     int game = ticTacToe.run();
-    return 1;
+    return game;
 }
 
