@@ -2,7 +2,7 @@
 
 
 game::game(char sign1, char sign2)
-    : round_(1), player1_(sign1, 1), player2_(sign2, 2)
+    : round_(0), spaceLeft_(9), winner_(0), player1_(sign1, 1), player2_(sign2, 2)
 {
     //Initalizing map to underscrores
     for (int i = 0; i < 3; i++){
@@ -39,37 +39,32 @@ bool game::isNextMovePoss(const position& pos)
 void game::playNextMovePlayer1()
 {
     position pos = player1_.nextMove();
-    
-    if(isNextMovePoss(pos))
+
+    while (!isNextMovePoss(pos))
     {
+        pos = player1_.nextMoveMulTries();
 
-        gameMap_[pos.posY - 1][pos.poX - 1] = player1_.getSign();
-
-    } else{
-        while (!isNextMovePoss(pos))
-        {
-            std::cout << "Error, enter another set of coordiantes: ", std::cin >> pos.posY >> pos.poX;
-        }
-        
     }
+    
+    
+    gameMap_[pos.posY - 1][pos.poX - 1] = player1_.getSign();
+    spaceLeft_--;
+
 }
 
 void game::playNextMovePlayer2()
 {
     position pos = player2_.nextMove();
-    
-    if(isNextMovePoss(pos))
+
+    while (!isNextMovePoss(pos))
     {
+        pos = player2_.nextMoveMulTries();
 
-        gameMap_[pos.posY - 1][pos.poX - 1] = player2_.getSign();
-
-    } else{
-        while (!isNextMovePoss(pos))
-        {
-            std::cout << "Error, enter another set of coordiantes: ", std::cin >> pos.posY >> pos.poX;
-        }
-        
     }
+    
+    gameMap_[pos.posY - 1][pos.poX - 1] = player2_.getSign();
+    spaceLeft_--;
+
 }
 
 bool game::isgamewon()
@@ -102,40 +97,49 @@ int game::getRound() const
 
 void game::incrementRound()
 {
-    std::cout << "------------------------------------------" << std::endl;
     round_++;
-    std::cout << std::endl;
-    std::cout << std::endl;
     std::cout  << "-----------------" << "Round " << round_ << "-----------------" << std::endl;
 
 }
 
-void game::endGame()
+void game::endGame(int winner)
 {
 
     std::cout << "Game ended, ";
-    if(player1_.getPlayerNum() && round_ < 5)
+    if(winner == 1)
         std::cout << "Player 1 won the game in " << round_ - 1 << " rounds!!!!" << std::endl;
-    else if(player2_.getPlayerNum() == 0)
+    else if(winner == 2)
         std::cout << "Player 2 won the game in " << round_ - 1  << " rounds!!!!" << std::endl;
-    else if (round_ == 5) std::cout << "in a tie" << std::endl;
+    else if (winner == 0) std::cout << "in a tie" << std::endl;
 
 }
 
-void game::run()
+int game::run()
 {
-    std::cout  << "-----------------" << "Round " << 1 << "-----------------" << std::endl;
-
-    while (!isgamewon())
+    bool end = false;
+    
+    while (!end)
     {
-        playNextMovePlayer1();
-        printmap();
-        if(isgamewon()) break;
-        playNextMovePlayer2();
-        printmap();
         incrementRound();
+        playNextMovePlayer1();
+        if(spaceLeft_ == 0) break;
+        printmap();
+        if(isgamewon())
+        {
+            winner_ = player1_.getPlayerNum();
+            break;
+        } 
+        playNextMovePlayer2();
+        if(isgamewon())
+        {
+            winner_ = player2_.getPlayerNum();
+            break;
+        } 
+        printmap();
+        std::cout << std::endl;
     }
 
-    endGame();
+    endGame(winner_);
+    return 1;
     
 }

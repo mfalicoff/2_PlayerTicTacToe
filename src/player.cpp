@@ -14,6 +14,13 @@ position player::nextMove()
 
 }
 
+position player::nextMoveMulTries()
+{
+    position pos;
+    std::cout <<"Error, enter another set of coordiantes ", std::cin >> pos.posY >> pos.poX;
+    return {pos};
+}
+
     
 char player::getSign() const
 {

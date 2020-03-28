@@ -9,7 +9,7 @@ class game {
 public:
 
     game(char sign1, char sign2);
-    void run();
+    int run();
 
     void printmap();
     bool isNextMovePoss(const position& pos);
@@ -19,7 +19,7 @@ public:
 
     int getRound() const;
     void incrementRound();
-    void endGame();
+    void endGame(int winner);
 
 private:
 
@@ -28,6 +28,8 @@ private:
     int currentPlayer_;
     player player1_;
     player player2_;
+    int spaceLeft_;
+    int winner_;
 
 
 

@@ -10,6 +10,7 @@ public:
 
     player(char sign, int playerNum);
     position nextMove();
+    position nextMoveMulTries();
     
     char getSign() const;
     int getPlayerNum() const;

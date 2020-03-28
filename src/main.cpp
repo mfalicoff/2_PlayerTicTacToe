@@ -18,7 +18,7 @@ int main()
     std::cin >> sign1 >> sign2;
 
     game ticTacToe(sign1, sign2);
-    ticTacToe.run();
-
+    int game = ticTacToe.run();
+    return 1;
 }
 
