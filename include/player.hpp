@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include <iomanip>
-#include "include.h"
 #include "position.h"
 
 class player {
