@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <iomanip>
+#include<algorithm> 
 #include "position.h"
 #include "player.hpp"
 
@@ -20,6 +21,9 @@ public:
     int getRound() const;
     void incrementRound();
     void endGame(int winner);
+
+    int minimax(int depth, bool isMax);
+    position findbestMove();
 
 private:
 

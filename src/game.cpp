@@ -129,7 +129,9 @@ int game::run()
             winner_ = player1_.getPlayerNum();
             break;
         } 
-        playNextMovePlayer2();
+        //playNextMovePlayer2();
+        position posi = findbestMove();
+        gameMap_[posi.posY][posi.poX] = player2_.getSign();
         if(isgamewon())
         {
             winner_ = player2_.getPlayerNum();
@@ -142,4 +144,98 @@ int game::run()
     endGame(winner_);
     return 1;
     
+}
+
+int game::minimax(int depth, bool isMax)
+{
+    if(isgamewon() || spaceLeft_ == 0)
+    {
+        if(winner_ == player1_.getPlayerNum())
+            return 10;
+        else if(winner_ == player2_.getPlayerNum())
+            return -10;
+        else return 0;
+    }
+
+    int bestVal, currVal;
+    if(isMax)
+    {
+        bestVal == -100;
+        for (size_t i = 0; i < 3; i++)
+        {
+            for (size_t j = 0; j < 3; j++)
+            {
+                position pos; pos.posY = i; pos.poX = j;
+                if(gameMap_[i][j] == '_')
+                {
+                    gameMap_[i][j] = player1_.getSign();
+                    currVal = minimax(depth+1, !isMax);
+                    bestVal = std::max(bestVal, currVal);
+                    gameMap_[i][j] = '_';
+                }
+
+            }
+            
+        }
+        return bestVal - depth;
+    }
+    else
+    {
+        bestVal = 100;
+        for (size_t i = 0; i < 3; i++)
+        {
+            for (size_t j = 0; j < 3; j++)
+            {
+                position pos; pos.posY = i; pos.poX = j;
+                if(gameMap_[i][j] == '_')
+                {
+                    gameMap_[i][j] = player2_.getSign();
+                    currVal = minimax(depth+1, !isMax);
+                    bestVal = std::min(bestVal, currVal);
+                    gameMap_[i][j] = '_';
+                }
+            }
+            
+        }
+        return bestVal - depth;
+
+    }
+    
+}
+
+position game::findbestMove()
+{
+    // function findBestMove(board):
+    // bestMove = NULL
+    // for each move in board :
+    //     if current move is better than bestMove
+    //         bestMove = current move
+    // return bestMove
+
+    position bestMove;
+    int bestVal = 100;
+
+    for (size_t i = 0; i < 3; i++)
+    {
+        for (size_t j = 0; j < 3; j++)
+        {
+            if(gameMap_[i][j] == '_')
+            {
+                gameMap_[i][j] = player2_.getSign();
+                int val = minimax(0, false);
+                gameMap_[i][j] = '_';
+
+                if(val < bestVal)
+                {
+                    bestMove.posY = i;
+                    bestMove.poX = j ;
+                }
+            }
+
+        }
+        
+    }
+    
+    return bestMove;
+
 }
